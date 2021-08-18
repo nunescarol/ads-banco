@@ -7,12 +7,12 @@ R = 10
 BI = 500
 BS = 500
 BU = 500
-senha_str = "password="+os.environ["SENHA_POSTGRES"]
+senha_str = "password=@@carol16A  "
 
 def createDatabase():
     
     conn = psycopg2.connect("dbname=postgres user=postgres "+senha_str) #comente essa linha se seu banco não tiver senha
-
+    conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     cur = conn.cursor()
     cur.execute("SELECT datname FROM pg_database;")
     list_database = cur.fetchall()
