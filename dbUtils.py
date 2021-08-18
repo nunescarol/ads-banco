@@ -7,11 +7,12 @@ R = 10
 BI = 500
 BS = 500
 BU = 500
+senha_str = "password="+os.environ["SENHA_POSTGRES"]
 
 def createDatabase():
-    senha = os.environ['SENHA_POSTGRES']
-    conn = psycopg2.connect("dbname=postgres user=postgres password=@@carol16A")
-    conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+    
+    conn = psycopg2.connect("dbname=postgres user=postgres "+senha_str) #comente essa linha se seu banco não tiver senha
+
     cur = conn.cursor()
     cur.execute("SELECT datname FROM pg_database;")
     list_database = cur.fetchall()
@@ -22,11 +23,11 @@ def createDatabase():
     conn.close()
 
 def createTable():
-    conn = psycopg2.connect("dbname=ads user=postgres password=@@carol16A")
+    conn = psycopg2.connect("dbname=ads user=postgres "+senha_str) #comente essa linha se seu banco não tiver senha
     conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
     cur = conn.cursor()
     cur.execute("CREATE TABLE A(                        "
-                " A0 INTEGER PRIMARY KEY,                      "
+                " A0 INTEGER PRIMARY KEY,               "
                 " A1 INTEGER NULL,                      "
                 " A2 NUMERIC NULL,                      "
                 " A3 VARCHAR(26) NULL,                  "
@@ -38,7 +39,7 @@ def createTable():
     conn.close()
 
 def connect():
-    conn = psycopg2.connect("dbname=ads user=postgres password=@@carol16A")
+    conn = psycopg2.connect("dbname=ads user=postgres "+senha_str) #comente essa linha se seu banco não tiver senha
     return conn
 
 def insert(conn, cur):
