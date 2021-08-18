@@ -7,7 +7,7 @@ R = 10
 BI = 500
 BS = 500
 BU = 500
-senha_str = "password=@@carol16A  "
+senha_str = "password="
 
 def createDatabase():
     
